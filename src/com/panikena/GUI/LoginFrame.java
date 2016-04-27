@@ -87,20 +87,27 @@ public class LoginFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 name = nameField.getText();
                 try {
-                    password = SHA1(passwordField.getPassword().toString());
+                    password = SHA1(passwordField.getText());
                 } catch (NoSuchAlgorithmException ex) {
                     ex.printStackTrace();
                 }
                 try {
-                    User user = userDAO.read(name);
-                    if (user != null && user.getPassword().equals(password)) {
-                        LoginFrame.this.setVisible(false);
-                        nameField.setText("");
-                        passwordField.setText("");
-                        new Mainframe(DBType);
-                    } else {
+                    User user;
+                    if(!name.equals("")){
+                        user = userDAO.read(name);
+
+                        if (user != null && user.getPassword().equals(password)) {
+                            LoginFrame.this.setVisible(false);
+                            nameField.setText("");
+                            passwordField.setText("");
+                            new Mainframe(DBType);
+                        } else {
+                            JOptionPane.showMessageDialog(LoginFrame.this, "Invalid name or password!", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }else{
                         JOptionPane.showMessageDialog(LoginFrame.this, "Invalid name or password!", "Error", JOptionPane.ERROR_MESSAGE);
                     }
+
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
