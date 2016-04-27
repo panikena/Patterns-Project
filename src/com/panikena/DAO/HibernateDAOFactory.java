@@ -33,4 +33,7 @@ public class HibernateDAOFactory extends DAOFactory {
     public CarDAO getCarDAO() {
         return new HibernateCarDAO();
     }
+
+    @Override
+    public UserDAO getUserDAO(){ return new HibernateUserDAO(); }
 }

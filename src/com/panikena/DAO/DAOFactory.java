@@ -12,6 +12,7 @@ public abstract class DAOFactory {
 
     public abstract CarDAO getCarDAO();
 
+    public abstract UserDAO getUserDAO();
 
     public static DAOFactory getDAOFactory(
             int whichFactory) {
