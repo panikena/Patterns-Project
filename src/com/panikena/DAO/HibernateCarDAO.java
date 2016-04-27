@@ -24,7 +24,6 @@ public class HibernateCarDAO implements CarDAO {
         session.beginTransaction();
         session.save(car);
         session.getTransaction().commit();
-       // session.close();
         return car;
     }
 
@@ -33,7 +32,6 @@ public class HibernateCarDAO implements CarDAO {
         session.beginTransaction();
         List<Car> list = session.createCriteria(VIN).list();
         session.getTransaction().commit();
-       // session.close();
         return list.get(0);
     }
 
@@ -42,7 +40,6 @@ public class HibernateCarDAO implements CarDAO {
         session.beginTransaction();
         session.update(car);
         session.getTransaction().commit();
-      //  session.close();
     }
 
     @Override
@@ -50,7 +47,6 @@ public class HibernateCarDAO implements CarDAO {
         session.beginTransaction();
         session.delete(car);
         session.getTransaction().commit();
-      //  session.close();
         return true;
     }
 
@@ -59,7 +55,6 @@ public class HibernateCarDAO implements CarDAO {
         session.beginTransaction();
         List<Car> list = session.createCriteria(Car.class).list();
         session.getTransaction().commit();
-       // session.close();
         return list;
     }
 }

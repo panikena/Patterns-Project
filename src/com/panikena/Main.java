@@ -1,8 +1,7 @@
 package com.panikena;
 
 import com.panikena.DAO.DAOFactory;
-import com.panikena.DAO.HibernateDAOFactory;
-import com.panikena.GUI.Mainframe;
+import com.panikena.GUI.LoginFrame;
 import de.javasoft.plaf.synthetica.SyntheticaPlainLookAndFeel;
 import javax.swing.*;
 
@@ -19,9 +18,9 @@ public class Main {
             e.printStackTrace();
         }
 
-        HibernateDAOFactory factory = new HibernateDAOFactory();
-        factory.getCarDAO();
-        Mainframe mf = new Mainframe(DAOFactory.HIBERNATE);
-        mf.setVisible(true);
+        LoginFrame lf = new LoginFrame(DAOFactory.HIBERNATE);
+
+        //Mainframe mf = new Mainframe();
+        //mf.setVisible(true);
     }
 }

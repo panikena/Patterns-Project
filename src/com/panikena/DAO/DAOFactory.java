@@ -23,7 +23,7 @@ public abstract class DAOFactory {
             case HIBERNATE:
                 return new HibernateDAOFactory();
             default           :
-                return null;
+                throw new IllegalArgumentException();
         }
     }
 }

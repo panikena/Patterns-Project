@@ -1,7 +1,16 @@
 package com.panikena.GUI;
 
+import com.panikena.DAO.DAOFactory;
+import com.panikena.DAO.UserDAO;
+import com.panikena.Models.User;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 
 public class LoginFrame extends JFrame {
 
@@ -13,7 +22,7 @@ public class LoginFrame extends JFrame {
     JPanel panel;
 
 
-    public LoginFrame(){
+    public LoginFrame(int DBType){
         super("Login");
         this.setLayout(new BorderLayout());
         this.setSize(new Dimension(300, 250));
@@ -27,6 +36,8 @@ public class LoginFrame extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setResizable(false);
 
+
+        UserDAO userDAO = DAOFactory.getDAOFactory(DBType).getUserDAO();
         panel = new JPanel();
         this.add(panel);
 
@@ -39,7 +50,6 @@ public class LoginFrame extends JFrame {
         panel.setLayout(new GridBagLayout());
 
         GridBagConstraints constraints = new GridBagConstraints();
-
 
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -67,13 +77,48 @@ public class LoginFrame extends JFrame {
         passwordField.setPreferredSize(new Dimension(100, 30));
         panel.add(passwordField, constraints);
 
-
         constraints.gridx = 0;
         constraints.gridy = 2;
         constraints.gridwidth = 2;
         panel.add(signInButton, constraints);
 
+        signInButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                name = nameField.getText();
+                try {
+                    password = SHA1(passwordField.getPassword().toString());
+                } catch (NoSuchAlgorithmException ex) {
+                    ex.printStackTrace();
+                }
+                try {
+                    User user = userDAO.read(name);
+                    if (user != null && user.getPassword().equals(password)) {
+                        LoginFrame.this.setVisible(false);
+                        nameField.setText("");
+                        passwordField.setText("");
+                        new Mainframe(DBType);
+                    } else {
+                        JOptionPane.showMessageDialog(LoginFrame.this, "Invalid name or password!", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+
         this.setVisible(true);
 
+    }
+
+    public static String SHA1(String input) throws NoSuchAlgorithmException {
+        MessageDigest mDigest = MessageDigest.getInstance("SHA1");
+        byte[] result = mDigest.digest(input.getBytes());
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < result.length; i++) {
+            sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
+        }
+        return sb.toString();
     }
 }
