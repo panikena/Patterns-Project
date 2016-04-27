@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.panikena.Models.Car" table="cars" schema="cars">
+        <id name="VIN" column="VIN"/>
+        <property name="license_plate" column="license_plate"/>
+        <property name="owner" column="owner"/>
+        <property name="color" column="color"/>
+    </class>
+    <class name="com.panikena.Models.User" table="users" schema="cars">
+        <id name="idusers" column="idusers"/>
+        <property name="name" column="name"/>
+        <property name="password" column="password"/>
+    </class>
+
+</hibernate-mapping>
