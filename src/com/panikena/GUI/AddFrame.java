@@ -122,7 +122,7 @@ public class AddFrame extends JDialog {
                         ex.printStackTrace();
                     }
                     ((Mainframe) parent).getTableModel().updateData(((Mainframe) parent).getDBType());
-                    ((Mainframe) parent).table.updateUI();
+                    ((Mainframe) parent).carsTable.updateUI();
 
                     VinTextField.setText("");
                     plateTextField.setText("");

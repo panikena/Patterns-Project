@@ -2,6 +2,7 @@ package com.panikena;
 
 import com.panikena.DAO.DAOFactory;
 import com.panikena.GUI.LoginFrame;
+import com.panikena.GUI.Mainframe;
 import de.javasoft.plaf.synthetica.SyntheticaPlainLookAndFeel;
 import javax.swing.*;
 
@@ -18,9 +19,9 @@ public class Main {
             e.printStackTrace();
         }
 
-        LoginFrame lf = new LoginFrame(DAOFactory.HIBERNATE);
+        //LoginFrame lf = new LoginFrame(DAOFactory.HIBERNATE);
 
-        //Mainframe mf = new Mainframe();
+        Mainframe mf = new Mainframe(DAOFactory.MYSQL);
         //mf.setVisible(true);
     }
 }
