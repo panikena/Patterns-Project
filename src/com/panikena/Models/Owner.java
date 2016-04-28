@@ -53,7 +53,7 @@ public class Owner {
         return country;
     }
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     Set<Car> cars;
 
 

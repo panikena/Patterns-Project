@@ -22,22 +22,47 @@ public class MySQLOwnerDAO implements OwnerDAO {
 
     @Override
     public Owner create(Owner owner) throws SQLException {
-        return null;
+        String sql = "INSERT INTO cars.owners (name, country, dob, sex) VALUES (?, ?, ?, ?);";
+        PreparedStatement stm = connection.prepareStatement(sql);
+        stm.setString(1, owner.getName());
+        stm.setString(2, owner.getCountry());
+        stm.setDate(3, owner.getDob());
+        stm.setString(4, owner.getSex());
+        stm.executeUpdate();
+        return owner;
     }
 
     @Override
     public Owner read(String name) throws SQLException {
-        return null;
+        String sql = "SELECT * FROM cars.owners WHERE name = ?;";
+        PreparedStatement stm = connection.prepareStatement(sql);
+        stm.setString(1, name);
+        ResultSet rs = stm.executeQuery();
+        rs.next();
+        return new Owner(rs.getString("name"),
+                        rs.getString("country"),
+                        rs.getDate("color"),
+                        rs.getString("sex"));
     }
 
     @Override
     public void update(Owner owner) throws SQLException {
-
+        String sql = "UPDATE cars.owners SET country=? , dob=? , sex=? WHERE name=?;";
+        PreparedStatement stm = connection.prepareStatement(sql);
+        stm.setString(1, owner.getCountry());
+        stm.setDate(2, owner.getDob());
+        stm.setString(3, owner.getSex());
+        stm.setString(4, owner.getName());
+        stm.executeUpdate();
     }
 
     @Override
     public boolean delete(Owner owner) throws SQLException {
-        return false;
+        String sql = "DELETE FROM cars.owners WHERE name=?;";
+        PreparedStatement stm = connection.prepareStatement(sql);
+        stm.setString(1, owner.getName());
+        stm.executeUpdate();
+        return true;
     }
 
     @Override

@@ -14,8 +14,7 @@ public class OwnerTableModel extends AbstractTableModel {
 
     List<Owner> data;
 
-    String [] columnNames = {"Name", "Date of birth", "Country", "Sex"};
-
+    String [] columnNames = {"Name","Country", "Date of birth",  "Sex"};
 
     public OwnerTableModel(int DBType){
         updateData(DBType);
@@ -58,8 +57,8 @@ public class OwnerTableModel extends AbstractTableModel {
         Owner owner = data.get(rowIndex);
         switch (columnIndex){
             case 0: return owner.getName();
-            case 1: return owner.getDob();
-            case 2: return owner.getCountry();
+            case 1: return owner.getCountry();
+            case 2: return owner.getDob();
             case 3: return owner.getSex();
             default:
                 throw new IllegalArgumentException();
