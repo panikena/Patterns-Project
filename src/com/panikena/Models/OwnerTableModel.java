@@ -2,6 +2,7 @@ package com.panikena.Models;
 
 import com.panikena.DAO.CarDAO;
 import com.panikena.DAO.DAOFactory;
+import com.panikena.DAO.OwnerDAO;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
@@ -13,8 +14,7 @@ public class OwnerTableModel extends AbstractTableModel {
 
     List<Owner> data;
 
-    String [] columnNames = {"Name", "Date of birth", "Country", "Sex"};
-
+    String [] columnNames = {"Name","Country", "Date of birth",  "Sex"};
 
     public OwnerTableModel(int DBType){
         updateData(DBType);
@@ -22,9 +22,9 @@ public class OwnerTableModel extends AbstractTableModel {
 
     public void updateData(int DBtype){
         DAOFactory factory = DAOFactory.getDAOFactory(DBtype);
-        CarDAO carDAO = factory.getCarDAO();
+        OwnerDAO ownerDAO = factory.getOwnerDAO();
         try {
-            data  = carDAO.getAll();
+            data  = ownerDAO.getAll();
 
         }catch (Exception ex){
             ex.printStackTrace();
@@ -37,7 +37,7 @@ public class OwnerTableModel extends AbstractTableModel {
     }
 
     @Override
-    public Class<?> getColumnClass(int columnIndex) {
+    public Class getColumnClass(int columnIndex) {
         return getValueAt(0, columnIndex).getClass();
     }
 
@@ -57,8 +57,8 @@ public class OwnerTableModel extends AbstractTableModel {
         Owner owner = data.get(rowIndex);
         switch (columnIndex){
             case 0: return owner.getName();
-            case 1: return owner.getDob();
-            case 2: return owner.getCountry();
+            case 1: return owner.getCountry();
+            case 2: return owner.getDob();
             case 3: return owner.getSex();
             default:
                 throw new IllegalArgumentException();

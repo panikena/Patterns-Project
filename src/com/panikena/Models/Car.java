@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Table(name = "cars", schema = "", catalog = "cars")
 public class Car {
 
-
     @Id
     @Column(name = "VIN")
     private String VIN;
@@ -22,16 +21,9 @@ public class Car {
     @Column(name = "owner")
     private String owner;
 
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name  = "owner", nullable = false)
-//    Owner owner;
-
-
     @Basic
     @Column(name = "color")
     private String color;
-
 
     public Car() {
     }
@@ -42,6 +34,7 @@ public class Car {
         this.color = builder.color;
         this.owner = builder.owner;
     }
+
     public static class CarBuilder{
 
 

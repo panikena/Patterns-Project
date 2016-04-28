@@ -1,5 +1,7 @@
 package com.panikena.DAO;
 
+import com.panikena.Models.Owner;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -30,7 +32,7 @@ public class MySQLDAOFactory extends DAOFactory {
     }
 
 
-
+    public OwnerDAO getOwnerDAO() {return new MySQLOwnerDAO();}
 
     @Override
     public UserDAO getUserDAO(){

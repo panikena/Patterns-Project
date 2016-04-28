@@ -14,6 +14,8 @@ public abstract class DAOFactory {
 
     public abstract UserDAO getUserDAO();
 
+    public abstract OwnerDAO getOwnerDAO();
+
     public static DAOFactory getDAOFactory(
             int whichFactory) {
 

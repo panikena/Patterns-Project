@@ -8,10 +8,21 @@ import java.util.Set;
  * Created by Artem on 27.04.2016.
  */
 @Entity
-@Table(name = "owners", schema = "")
+@Table(name = "owners")
 public class Owner {
 
+    public Owner() {
+    }
+
+    public Owner(String name, String country, Date dob,  String sex) {
+        this.name = name;
+        this.sex = sex;
+        this.dob = dob;
+        this.country = country;
+    }
+
     @Id
+    @Column(name ="name")
     String name;
 
     @Basic
@@ -42,7 +53,23 @@ public class Owner {
         return country;
     }
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     Set<Car> cars;
 
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
 }

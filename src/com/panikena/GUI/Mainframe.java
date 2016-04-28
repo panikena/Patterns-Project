@@ -3,6 +3,7 @@ package com.panikena.GUI;
 import com.panikena.DAO.CarDAO;
 import com.panikena.Models.CarTableModel;
 import com.panikena.DAO.DAOFactory;
+import com.panikena.Models.OwnerTableModel;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
@@ -20,16 +21,17 @@ import java.sql.SQLException;
 /**
  * Created by Artem on 18.04.2016.
  */
-public class Mainframe extends JFrame implements TableModelListener{
+public class Mainframe extends JFrame{
 
     JMenuBar menuBar;
     JMenu fileMenu;
     JTable carsTable, ownersTable;
-    JScrollPane scrollPane;
+    JScrollPane carsScrollPane, ownersScrollPane;
     JTabbedPane tabbedPane;
-    JPanel carsTablePanel, buttonPanel;
+    JPanel buttonPanel;
     JButton editButton, addButton, deleteButton, checkButton;
-    CarTableModel tableModel;
+    CarTableModel carTableModel;
+    OwnerTableModel ownerTableModel;
     CarDAO carDAO;
     int DBType;
 
@@ -64,28 +66,13 @@ public class Mainframe extends JFrame implements TableModelListener{
         this.add(tabbedPane, BorderLayout.CENTER);
 
 
-        tableModel = new CarTableModel(DBtype);
-        carsTable = new JTable(tableModel);
-        scrollPane = new JScrollPane(carsTable);
-        //carsTablePanel = new JPanel();
-        tabbedPane.add("Cars", scrollPane);
+        carTableModel = new CarTableModel(DBtype);
+        carsTable = new JTable(carTableModel);
+        carsScrollPane = new JScrollPane(carsTable);
+        tabbedPane.add("Cars", carsScrollPane);
 
-
-
-        //carsTablePanel.add(scrollPane, BorderLayout.CENTER);
-
-        ownersTable = new JTable();
-        tabbedPane.add("Owners", ownersTable);
-
-
-//        carsTablePanel.setLayout(new BorderLayout());
-//        this.add(carsTablePanel, BorderLayout.CENTER);
-
-
-
-        carsTable.getModel().addTableModelListener(this);
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(carsTable.getModel());
-        carsTable.setRowSorter(sorter);
+        TableRowSorter<TableModel> carsSorter = new TableRowSorter<>(carsTable.getModel());
+        carsTable.setRowSorter(carsSorter);
         TableColumn column;
         for (int i = 0; i < 4; i++) {
             column = carsTable.getColumnModel().getColumn(i);
@@ -96,6 +83,13 @@ public class Mainframe extends JFrame implements TableModelListener{
             }
         }
 
+
+        ownerTableModel = new OwnerTableModel(DBtype);
+        ownersTable = new JTable(ownerTableModel);
+        ownersScrollPane = new JScrollPane(ownersTable);
+        tabbedPane.add("Owners", ownersScrollPane);
+        TableRowSorter<TableModel> ownersSorter = new TableRowSorter<>(ownersTable.getModel());
+        ownersTable.setRowSorter(ownersSorter);
 
 
         buttonPanel = new JPanel();
@@ -146,7 +140,7 @@ public class Mainframe extends JFrame implements TableModelListener{
                 String [] options = {"Yes", "No"};
                 int option = JOptionPane.showOptionDialog(Mainframe.this,
                         "Do you want to delete an entry?",
-                        "Delete " + tableModel.getValueAt(carsTable.getSelectedRow(), 0),
+                        "Delete " + carTableModel.getValueAt(carsTable.getSelectedRow(), 0),
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.INFORMATION_MESSAGE,
                         null,
@@ -155,11 +149,11 @@ public class Mainframe extends JFrame implements TableModelListener{
 
                 if(option == JOptionPane.YES_OPTION){
                     try{
-                        carDAO.delete(tableModel.getRowAt(carsTable.getSelectedRow()));
+                        carDAO.delete(carTableModel.getRowAt(carsTable.getSelectedRow()));
                     }catch (SQLException ex){
                         ex.printStackTrace();
                     }
-                    tableModel.updateData(DBtype);
+                    carTableModel.updateData(DBtype);
                     carsTable.updateUI();
                 }
             }
@@ -169,7 +163,7 @@ public class Mainframe extends JFrame implements TableModelListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
-                    Desktop.getDesktop().browse(URI.create("http://www.vindecoderz.com/EN/check-lookup/" + tableModel.getRowAt(carsTable.getSelectedRow()).getVIN()));
+                    Desktop.getDesktop().browse(URI.create("http://www.vindecoderz.com/EN/check-lookup/" + carTableModel.getRowAt(carsTable.getSelectedRow()).getVIN()));
                 }catch (IOException ex){
                     ex.printStackTrace();
                 }
@@ -182,19 +176,19 @@ public class Mainframe extends JFrame implements TableModelListener{
 
     }
 
-    public CarTableModel getTableModel(){
-        return tableModel;
+    public CarTableModel getCarTableModel(){
+        return carTableModel;
     }
 
-    public void tableChanged(TableModelEvent e) {
-        int row = e.getFirstRow();
-        int column = e.getColumn();
-        System.out.println("Row:"+ row);
-        System.out.println("Column" + column);
-        TableModel model = (TableModel)e.getSource();
-        String columnName = model.getColumnName(column);
-        Object data = model.getValueAt(row, column);
-    }
+//    public void tableChanged(TableModelEvent e) {
+//        int row = e.getFirstRow();
+//        int column = e.getColumn();
+//        System.out.println("Row:"+ row);
+//        System.out.println("Column" + column);
+//        TableModel model = (TableModel)e.getSource();
+//        String columnName = model.getColumnName(column);
+//        Object data = model.getValueAt(row, column);
+//    }
 
     public int getDBType(){
         return DBType;

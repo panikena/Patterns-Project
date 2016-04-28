@@ -124,7 +124,7 @@ public class EditFrame extends JDialog {
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
-                    ((Mainframe) parent).getTableModel().updateData(((Mainframe) parent).getDBType());
+                    ((Mainframe) parent).getCarTableModel().updateData(((Mainframe) parent).getDBType());
                     ((Mainframe) parent).carsTable.updateUI();
 
                     VinTextField.setText("");
@@ -164,7 +164,7 @@ public class EditFrame extends JDialog {
     public static EditFrame getInstance(JFrame parent) {
         Car car;
         if (((Mainframe) parent).carsTable.getSelectedRow() > -1) {
-            car = ((Mainframe) parent).tableModel.getRowAt(((Mainframe) parent).carsTable.getSelectedRow());
+            car = ((Mainframe) parent).carTableModel.getRowAt(((Mainframe) parent).carsTable.getSelectedRow());
             VIN = car.getVIN();
             plate = car.getLicense_plate();
             owner = car.getOwner();
