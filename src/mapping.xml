@@ -15,11 +15,11 @@
         <property name="name" column="name"/>
         <property name="password" column="password"/>
     </class>
-    <class name="com.panikena.Models.Owner">
+   <!--<class name="com.panikena.Models.Owner">
         <id name = "owner" column="owner"/>
         <property name="country" column="country" />
         <property name="dob" column="dob"/>
         <property name="sex" column="sex"/>
-    </class>
+    </class>-->
 
 </hibernate-mapping>

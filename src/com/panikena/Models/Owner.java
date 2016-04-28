@@ -26,6 +26,22 @@ public class Owner {
     @Column(name = "country")
     String country;
 
+    public String getName() {
+        return name;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     Set<Car> cars;
 
