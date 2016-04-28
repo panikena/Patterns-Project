@@ -2,6 +2,7 @@ package com.panikena.Models;
 
 import com.panikena.DAO.CarDAO;
 import com.panikena.DAO.DAOFactory;
+import com.panikena.DAO.OwnerDAO;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
@@ -22,7 +23,7 @@ public class OwnerTableModel extends AbstractTableModel {
 
     public void updateData(int DBtype){
         DAOFactory factory = DAOFactory.getDAOFactory(DBtype);
-        CarDAO carDAO = factory.getCarDAO();
+        OwnerDAO carDAO = factory.getOwnerDAO();
         try {
             data  = carDAO.getAll();
 

@@ -11,7 +11,11 @@ import java.util.Set;
 @Table(name = "owners", schema = "")
 public class Owner {
 
+    public Owner() {
+    }
+
     @Id
+    @Column(name ="name")
     String name;
 
     @Basic
@@ -45,4 +49,20 @@ public class Owner {
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     Set<Car> cars;
 
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
 }
