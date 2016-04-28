@@ -12,16 +12,16 @@ import javax.swing.*;
 public class Main {
 
     public static void  main(String args[]){
-        try{
-            UIManager.setLookAndFeel(SyntheticaPlainLookAndFeel.class.getName());
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+//        try{
+//            UIManager.setLookAndFeel(SyntheticaPlainLookAndFeel.class.getName());
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//        }
 
         //LoginFrame lf = new LoginFrame(DAOFactory.HIBERNATE);
 
-        Mainframe mf = new Mainframe(DAOFactory.MYSQL);
+       // Mainframe mf = new Mainframe(DAOFactory.MYSQL);
         //mf.setVisible(true);
     }
 }

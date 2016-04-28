@@ -43,7 +43,8 @@ public class Mainframe extends JFrame implements TableModelListener{
         this.setLayout(new BorderLayout());
         this.setSize(new Dimension(650, 400));
         this.setPreferredSize(new Dimension(650, 400));
-        this.setResizable(false);
+        this.setResizable(true);
+
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int centerX = (screenSize.width - this.getWidth()) / 2;

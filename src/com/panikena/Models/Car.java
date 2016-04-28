@@ -18,9 +18,16 @@ public class Car {
     @Basic
     @Column(name = "license_plate")
     private String license_plate;
-    @Basic
-    @Column(name = "owner")
-    private String owner;
+//    @Basic
+//    @Column(name = "owner")
+//    private String owner;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name  = "owner", nullable = false)
+    Owner owner;
+
+
     @Basic
     @Column(name = "color")
     private String color;
