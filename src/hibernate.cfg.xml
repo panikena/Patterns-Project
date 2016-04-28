@@ -10,7 +10,7 @@
     <property name="connection.password">root</property>
       <mapping resource="mapping.xml"/>
       <mapping class = "com.panikena.Models.Car"/>
-      <!--<mapping class="com.panikena.Models.Owner"/>-->
+      <mapping class="com.panikena.Models.Owner"/>
       <mapping class="com.panikena.Models.User"/>
   </session-factory>
 </hibernate-configuration>

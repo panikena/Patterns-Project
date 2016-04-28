@@ -1,5 +1,8 @@
 package com.panikena.Models;
 
+import com.panikena.DAO.CarDAO;
+import com.panikena.DAO.DAOFactory;
+
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
@@ -11,6 +14,22 @@ public class OwnerTableModel extends AbstractTableModel {
     List<Owner> data;
 
     String [] columnNames = {"Name", "Date of birth", "Country", "Sex"};
+
+
+    public OwnerTableModel(int DBType){
+        updateData(DBType);
+    }
+
+    public void updateData(int DBtype){
+        DAOFactory factory = DAOFactory.getDAOFactory(DBtype);
+        CarDAO carDAO = factory.getCarDAO();
+        try {
+            data  = carDAO.getAll();
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
 
     @Override
     public String getColumnName(int column) {
