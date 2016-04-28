@@ -8,10 +8,17 @@ import java.util.Set;
  * Created by Artem on 27.04.2016.
  */
 @Entity
-@Table(name = "owners", schema = "")
+@Table(name = "owners")
 public class Owner {
 
     public Owner() {
+    }
+
+    public Owner(String name, String country, Date dob,  String sex) {
+        this.name = name;
+        this.sex = sex;
+        this.dob = dob;
+        this.country = country;
     }
 
     @Id

@@ -121,7 +121,7 @@ public class AddFrame extends JDialog {
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
-                    ((Mainframe) parent).getTableModel().updateData(((Mainframe) parent).getDBType());
+                    ((Mainframe) parent).getCarTableModel().updateData(((Mainframe) parent).getDBType());
                     ((Mainframe) parent).carsTable.updateUI();
 
                     VinTextField.setText("");

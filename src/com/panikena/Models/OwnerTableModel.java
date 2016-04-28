@@ -23,9 +23,9 @@ public class OwnerTableModel extends AbstractTableModel {
 
     public void updateData(int DBtype){
         DAOFactory factory = DAOFactory.getDAOFactory(DBtype);
-        OwnerDAO carDAO = factory.getOwnerDAO();
+        OwnerDAO ownerDAO = factory.getOwnerDAO();
         try {
-            data  = carDAO.getAll();
+            data  = ownerDAO.getAll();
 
         }catch (Exception ex){
             ex.printStackTrace();
@@ -38,7 +38,7 @@ public class OwnerTableModel extends AbstractTableModel {
     }
 
     @Override
-    public Class<?> getColumnClass(int columnIndex) {
+    public Class getColumnClass(int columnIndex) {
         return getValueAt(0, columnIndex).getClass();
     }
 

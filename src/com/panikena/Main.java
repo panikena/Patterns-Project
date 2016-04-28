@@ -19,9 +19,9 @@ public class Main {
 //            e.printStackTrace();
 //        }
 
-        LoginFrame lf = new LoginFrame(DAOFactory.HIBERNATE);
+//        LoginFrame lf = new LoginFrame(DAOFactory.HIBERNATE);
 
-       // Mainframe mf = new Mainframe(DAOFactory.MYSQL);
+        Mainframe mf = new Mainframe(DAOFactory.MYSQL);
         //mf.setVisible(true);
     }
 }
